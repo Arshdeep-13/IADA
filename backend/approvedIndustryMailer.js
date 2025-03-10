@@ -1,0 +1,40 @@
+const nodemailer = require("nodemailer");
+const dotenv = require("dotenv");
+dotenv.config();
+
+const mailSender = (email,name,industry) => {
+    const transporter = nodemailer.createTransport({
+        host: "smtp.hostinger.com",
+        port: 465,
+        secure: true, // Use true for port 465, false for all other ports
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.PASS,
+        },
+    });
+
+    const mailOptions = {
+        from: {
+            name: "Confirmation from IADA",
+            address: "swca.support@iadabaddi.com",
+        }, // sender address
+        to: [email], // receiver
+        subject: "Registration Successfull", // Subject line
+        //text: "Hello world?", // plain text body
+        html: `Registration request for user ${name} under the industry ${industry} has been approved.<br/><br/> Now you can login using the password you registered with.`, // html body
+    };
+
+
+    const sendMail = async (transporter, mailOptions) => {
+        try {
+            await transporter.sendMail(mailOptions); // Pass mailOptions here
+            console.log('Email sent successfully!');
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    sendMail(transporter, mailOptions);
+}
+
+module.exports=mailSender;
