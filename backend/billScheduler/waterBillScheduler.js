@@ -9,7 +9,7 @@ const wss = new WebSocket.Server({ port: 9090 });
 const fetchData = async () => {
   try {
     const res = await axios.get(
-      "https://backend.iadabaddi.com/api/waterbill/getFinances"
+      "https://backend.iadabaddi.com/api/finances/getFinances"
     );
     return res.data;
   } catch (e) {

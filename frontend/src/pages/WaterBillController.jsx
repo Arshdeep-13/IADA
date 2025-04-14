@@ -82,7 +82,7 @@ const WaterBillControl = () => {
 
     try {
       axios.post(
-        `${import.meta.env.VITE_SERVER}/api/waterbill`,
+        `${import.meta.env.VITE_SERVER}/api/finances`,
         { parsedFormData },
         {
           headers: {
